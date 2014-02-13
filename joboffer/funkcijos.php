@@ -19,8 +19,8 @@ function kategorijos() {
 	return $categories;
 }
 
-function produktai(){
-	$result = mysql_query("SELECT * FROM product WHERE category_id = 1");
+function produktai($par){
+	$result = mysql_query("SELECT * FROM product WHERE category_id = {$par}");
 	$products=array();
 	while($row=mysql_fetch_array($result)){
 		$row['pvm']=round($row['price']*21/121,2);

@@ -9,7 +9,7 @@ if($xml->action == 'getCategories'){
 	$categories = kategorijos();
 	require '../smarty/templates/input.phtml';
 }else{
-	$products = produktai();
+	$products = produktai($xml->params->catid);
 	require '../smarty/templates/inputProducts.phtml';
 }
 

@@ -1,0 +1,41 @@
+joboffer.zip turėtų būti išskleistas DOCUMENT_ROOT direktorijoje,
+kad būtų pasiekiamas adresu http://localhost/joboffer/tester.php
+ 
+reikia realizuoti PHP kodą, kuris pradedamas vykdyti
+http://localhost/joboffer/input.php faile
+
+tester.php yra pagrindinis ir vienintelis failas kuris kviečiamas per naršyklę.
+tester.php siunčia XML užklausą į input.php ir gauna atgal rezultatą HTML kodo fragmetu.
+
+tiesiogiai input.php failas neturėtų būti kviečiamas.
+
+tester.php skirptas nekoreguotinas.
+
+Failų gali būti daugiau nei tik input.php (galimas klasė = failas principas)
+
+Pradiniai duomenys
+    SQL duomenų failas (nfq_job.sql)
+    tester.php failas
+        Paleidus ši failiuką, galima pasirinkti kurį testavimo XML'ą siųsti: 1
+        arba 2.
+norima gauti rezultatus:
+    1) kategorijų sąrašą su skaičiumi, kiek prekių yra kiekvienoje kategorijoje
+         pvz HTML:
+        <ul>
+          <li>#1 test category one (2)</li>
+          <li>#2 two category test (1)</li>
+          <li>#3 category three test (0)</li>
+        </ul>       
+    2) Kategorijos prekių sąrašą, su paskaičiuota PVM dalį (duombazėje kaina
+        nurodyta su 21% PVM ) pvz HTML:
+        <ul>
+          <li>#1 good product 12.21 (PVM 2.12)</li>
+          <li>#2 yet another good product 21.21(PVM 3.68)</li>
+        </ul>       
+ 
+Reikalavimai:
+    Kodas turėtų būti kuo daugiau objektiškai programuotas (pvz prekės objektas,
+    kategorijos objektas, prekių sąrašo objektas ir t.t.)
+ 
+    Išvedimui panaudoti Smarty template engine ( 2.x
+    http://www.smarty.net/download )

@@ -1,7 +1,11 @@
 <?php
+
+namespace Funkcijos;
+
 include('phpmyadmin.php');
 
-function kategorijos() {
+function kategorijos()
+{
 	$result = mysql_query("
 	SELECT category.*, (SELECT COUNT(1) FROM product WHERE product.category_id = category.category_id) AS kiekis
 	FROM category");
@@ -19,12 +23,13 @@ function kategorijos() {
 	return $categories;
 }
 
-function produktai($par){
-	$result = mysql_query("SELECT * FROM product WHERE category_id = {$par}");
-	$products=array();
-	while($row=mysql_fetch_array($result)){
-		$row['pvm']=round($row['price']*21/121,2);
-		$products[]=$row;
+function produktai($catId)
+{
+	$result = mysql_query("SELECT * FROM product WHERE category_id = {$catId}");
+	$products = array();
+	while ($row = mysql_fetch_array($result)) {
+		$row['pvm'] = round($row['price'] * 21 / 121, 2);
+		$products[] = $row;
 	}
 	return $products;
 }

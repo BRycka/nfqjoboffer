@@ -1,8 +1,8 @@
 <?php
 
-namespace Funkcijos;
-
 include('phpmyadmin.php');
+include('Category.php');
+include('Product.php');
 
 function kategorijos()
 {
@@ -20,7 +20,12 @@ function kategorijos()
 
     $categories = array();
     while ($row = mysql_fetch_array($result)) {
-        $categories[] = $row;
+       // $categories[] = $row;
+        $category = new Category();
+        $category->category_id = $row['category_id'];
+        $category->category_name = $row['category_name'];
+        $category->products_count = $row['kiekis'];
+        $categories[] = $category;
     }
     return $categories;
 }
@@ -31,7 +36,14 @@ function produktai($catId)
     $products = array();
     while ($row = mysql_fetch_array($result)) {
         $row['pvm'] = round($row['price'] * 21 / 121, 2);
-        $products[] = $row;
+        //$products[] = $row;
+        $product = new Product();
+        $product->product_id = $row['product_id'];
+        $product->category_id = $row['category_id'];
+        $product->product_name = $row['product_name'];
+        $product->price = $row['price'];
+        $product->pvm = $row['pvm'];
+        $products[] = $product;
     }
     return $products;
 }

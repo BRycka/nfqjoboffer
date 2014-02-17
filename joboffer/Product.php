@@ -11,5 +11,12 @@ class Product
     public $category_id;
     public $product_name;
     public $price;
-    public $pvm;
+    protected $pvm;
+    public function calculateVat()
+    {
+        if ($this->pvm === null) {
+            $this->pvm = round($this->price * 21 / 121, 2);
+        }
+        return $this->pvm;
+    }
 }

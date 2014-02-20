@@ -1,7 +1,0 @@
-<ul>
-<?php foreach ($products as $product):
-    /** @var Product $product */
-    ?>
-    <li>#<?php echo $product->product_id . ' ' . $product->product_name . ' ' . $product->price . "(PVM.{$product->calculateVat()})" ?></li>
-<?php endforeach; ?>
-</ul>

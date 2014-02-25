@@ -12,21 +12,27 @@ define('NFQ_DIR', '/home/ricblt/workspace/nfq/');
 define('SMARTY_DIR', '/home/ricblt/workspace/nfq/Smarty-3.1.16/libs/');
 // include the setup script
 include(NFQ_DIR . 'joboffer/nfq_setup.php');
-
-$nfq = new Nfq_Smarty();
-
-$XMLSTRING = file_get_contents('php://input');
 include('funkcijos.php');
+include('Request.php');
+$nfq = new Nfq_Smarty();
+$katPro = new KatPro();
 
-$xml = simplexml_load_string($XMLSTRING);
+$xmlString = file_get_contents('php://input');
+
+$request = new Request($xmlString);
+
+//$xml = simplexml_load_string($XMLSTRING);
 //print_r($xml);
-
-if ($xml->action == 'getCategories') {
-    $categories = kategorijos();
+if ($request->getAction() == 'getCategories') {
+    $categories = $katPro->kategorijos();
     $nfq->assign('categories', $categories);
     $nfq->display('categories.tpl');
 } else {
-    $products = produktai($xml->params->catid);
+//    echo "Parametrai " . $request->getParam('catid');
+    $products = $katPro->produktai($request->getParam('catid'));
     $nfq->assign('products', $products);
     $nfq->display('product.tpl');
 }
+
+
+//request objektas, response objektas mvc. frontcontroller.

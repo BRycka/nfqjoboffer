@@ -1,6 +1,9 @@
 <?php
 
-class Request {
+namespace joboffer\Core;
+
+class Request
+{
     /**
      * @var SimpleXMLElement
      */
@@ -32,5 +35,12 @@ class Request {
         } else {
             return null;
         }
+    }
+
+    public function getFormat()
+    {
+        $format = explode(';', $_SERVER['CONTENT_TYPE']);
+        $format = explode('/', $format[0]);
+        return $format[1];
     }
 }

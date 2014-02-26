@@ -36,13 +36,14 @@ curl_setopt($oCurl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($oCurl, CURLOPT_FRESH_CONNECT, true);
 curl_setopt($oCurl, CURLOPT_HTTPHEADER, 
     array(
-        'Content-type: text/xml; charset=UTF-8', 
+        'Content-type: text/xml; charset=UTF-8',
         'Expect: '
     )
 );
         
 $sRespond = curl_exec($oCurl);
 $iRespondCode = curl_getinfo($oCurl, CURLINFO_HTTP_CODE);
+$sContentType = curl_getinfo($oCurl, CURLINFO_CONTENT_TYPE);
 curl_close($oCurl);
 
-echo '<pre>RESPOND  ', $iRespondCode, "\n\n", htmlentities($sRespond);
+echo '<pre>RESPOND  ', $iRespondCode, "\nCONTENT-TYPE  {$sContentType}", "\n\n", htmlentities($sRespond);
